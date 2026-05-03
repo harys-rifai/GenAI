@@ -59,4 +59,17 @@ Traceback (most recent call last):
   File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
   File "/Users/harysrifai/web/genAI/whatsapp/urls.py", line 2, in <module>
     from .views import webhook
-ImportError: cannot import name 'webhook' from 'whatsapp.views' (/Users/harysrifai/web/genAI/whatsapp/views.py)
+  File "/Users/harysrifai/web/genAI/whatsapp/views.py", line 8, in <module>
+    llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harysrifai/web/genAI/venv/lib/python3.11/site-packages/langchain_core/load/serializable.py", line 115, in __init__
+    super().__init__(*args, **kwargs)
+  File "/Users/harysrifai/web/genAI/venv/lib/python3.11/site-packages/pydantic/main.py", line 263, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harysrifai/web/genAI/venv/lib/python3.11/site-packages/langchain_openai/chat_models/base.py", line 825, in validate_environment
+    self.root_client = openai.OpenAI(**client_params, **sync_specific)  # type: ignore[arg-type]
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/harysrifai/web/genAI/venv/lib/python3.11/site-packages/openai/_client.py", line 135, in __init__
+    raise OpenAIError(
+openai.OpenAIError: The api_key client option must be set either by passing api_key to the client or by setting the OPENAI_API_KEY environment variable
