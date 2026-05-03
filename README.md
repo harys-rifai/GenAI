@@ -1,6 +1,6 @@
 # Repository Notes
 
-Generated on: 2026-05-03 11:24:47
+Generated on: 2026-05-03 11:31:04
 
 ## 📂 Project Structure
 ```
@@ -3199,6 +3199,42 @@ Generated on: 2026-05-03 11:24:47
 │   ├── package-lock.json
 │   ├── package.json
 │   └── whatsapp_gateway.log
+├── node_modules
+│   ├── .bin
+│   │   └── qrcode-terminal -> ../qrcode-terminal/bin/qrcode-terminal.js
+│   ├── .package-lock.json
+│   └── qrcode-terminal
+│       ├── .travis.yml
+│       ├── LICENSE
+│       ├── README.md
+│       ├── bin
+│       │   └── qrcode-terminal.js
+│       ├── example
+│       │   ├── basic.js
+│       │   ├── basic.png
+│       │   ├── callback.js
+│       │   └── small-qrcode.js
+│       ├── lib
+│       │   └── main.js
+│       ├── package.json
+│       ├── test
+│       │   └── main.js
+│       └── vendor
+│           └── QRCode
+│               ├── QR8bitByte.js
+│               ├── QRBitBuffer.js
+│               ├── QRErrorCorrectLevel.js
+│               ├── QRMaskPattern.js
+│               ├── QRMath.js
+│               ├── QRMode.js
+│               ├── QRPolynomial.js
+│               ├── QRRSBlock.js
+│               ├── QRUtil.js
+│               └── index.js
+├── opencode_ai.sh
+├── package-lock.json
+├── package.json
+├── project_context_ai.txt
 ├── requirements.txt
 ├── run.log
 ├── run_service.sh
@@ -3208,14 +3244,18 @@ Generated on: 2026-05-03 11:24:47
     ├── __init__.py
     ├── admin.py
     ├── apps.py
+    ├── context_manager.py
     ├── migrations
     │   └── __init__.py
     ├── models.py
+    ├── templates
+    │   └── whatsapp
+    │       └── index.html
     ├── tests.py
     ├── urls.py
     └── views.py
 
-486 directories, 2724 files
+497 directories, 2753 files
 ```
 
 ## 📄 Files in Repo
@@ -23802,8 +23842,8 @@ whatsapp/urls.py
 whatsapp/views.py
 
 ## 📝 Recent Commits
-- 0e75f840 Auto-update README on 2026-05-03 11:22:08 (3 minutes ago)
-- 7fdc8593 Auto-update README on 2026-05-03 11:21:39 (3 minutes ago)
-- bd145a00 Auto-update README on 2026-05-03 11:18:14 (7 minutes ago)
-- 6df33d2a changes (7 minutes ago)
-- 71fcccc3 Auto-update README on 2026-05-03 11:15:46 (7 minutes ago)
+- 588db195 Auto-update README on 2026-05-03 11:24:47 (6 minutes ago)
+- 0e75f840 Auto-update README on 2026-05-03 11:22:08 (9 minutes ago)
+- 7fdc8593 Auto-update README on 2026-05-03 11:21:39 (9 minutes ago)
+- bd145a00 Auto-update README on 2026-05-03 11:18:14 (13 minutes ago)
+- 6df33d2a changes (13 minutes ago)

@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from dotenv import load_dotenv
@@ -8,9 +9,27 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationChain
+from langchain.prompts import PromptTemplate
+from .context_manager import get_project_summary
 
 # Load environment variables from .env
 load_dotenv()
+
+# System prompt to give the AI context about the project
+PROJECT_CONTEXT = get_project_summary()
+OPENCODE_PROMPT = PromptTemplate(
+    input_variables=["history", "input"],
+    template=f"""You are OpenCode AI Assistant, a specialized AI for reading and understanding the code in this repository.
+You help the user with coding tasks, explaining logic, and managing this specific app.
+
+PROJECT CONTEXT:
+{PROJECT_CONTEXT}
+
+Current conversation:
+{{history}}
+User: {{input}}
+OpenCode:"""
+)
 
 # Initialize LLM lazily to avoid startup crashes if key is missing
 def get_llm():
@@ -43,7 +62,11 @@ def webhook(request):
                 user_memories[number] = ConversationBufferMemory()
             
             memory = user_memories[number]
-            conversation = ConversationChain(llm=llm, memory=memory)
+            conversation = ConversationChain(
+                llm=llm, 
+                memory=memory,
+                prompt=OPENCODE_PROMPT
+            )
 
             # Generate reply
             reply = conversation.run(text)
@@ -67,10 +90,7 @@ def webhook(request):
             return JsonResponse({"error": str(e)}, status=500)
             
     if request.method == "GET":
-        return JsonResponse({
-            "status": "online",
-            "message": "WhatsApp Webhook is running. Send a POST request with 'number' and 'text' to interact with the AI."
-        })
+        return render(request, "whatsapp/index.html")
 
     return JsonResponse({"error": "Invalid request. Please use POST method."}, status=400)
 
