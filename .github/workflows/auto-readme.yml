@@ -1,0 +1,48 @@
+name: Auto Update README
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Generate README.md
+        run: |
+          echo "# Repository Notes" > README.md
+          echo "" >> README.md
+          echo "Generated on: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
+          echo "" >> README.md
+
+          echo "## 📂 Project Structure" >> README.md
+          echo '```' >> README.md
+          tree -a -I '.git|venv|__pycache__' >> README.md
+          echo '```' >> README.md
+          echo "" >> README.md
+
+          echo "## 📄 Files in Repo" >> README.md
+          git ls-files >> README.md
+          echo "" >> README.md
+
+          echo "## 📝 Recent Commits" >> README.md
+          git log -n 5 --pretty=format:"- %h %s (%cr)" >> README.md
+          echo "" >> README.md
+
+      - name: Commit & Push README
+        run: |
+          git add README.md
+          git commit -m "Auto-update README via GitHub Actions"
+          git push
