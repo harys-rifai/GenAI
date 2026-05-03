@@ -1,21 +1,70 @@
+import os
+import requests
+import json
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+from dotenv import load_dotenv
+
 from langchain_openai import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 from langchain.chains import ConversationChain
 
-llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
-memory = ConversationBufferMemory()
-conversation = ConversationChain(llm=llm, memory=memory)
+# Load environment variables from .env
+load_dotenv()
+
+# Initialize LLM lazily to avoid startup crashes if key is missing
+def get_llm():
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key or api_key == "your_openai_api_key_here":
+        return None
+    return ChatOpenAI(model="gpt-3.5-turbo", temperature=0, openai_api_key=api_key)
+
+# Global store for user memories (In-memory, cleared on server restart)
+user_memories = {}
 
 @csrf_exempt
 def webhook(request):
     if request.method == "POST":
-        data = json.loads(request.body)
-        text = data.get("text", "")
+        try:
+            data = json.loads(request.body)
+            number = data.get("number", "unknown")
+            text = data.get("text", "")
 
-        reply = conversation.run(text)
+            print(f"📩 Received message from {number}: {text}")
 
-        return JsonResponse({"reply": reply})
+            llm = get_llm()
+            if not llm:
+                error_msg = "❌ Error: OPENAI_API_KEY is not set or invalid in .env"
+                print(error_msg)
+                return JsonResponse({"error": error_msg}, status=500)
+
+            # Get or create memory for this specific user
+            if number not in user_memories:
+                user_memories[number] = ConversationBufferMemory()
+            
+            memory = user_memories[number]
+            conversation = ConversationChain(llm=llm, memory=memory)
+
+            # Generate reply
+            reply = conversation.run(text)
+            print(f"🤖 AI Reply to {number}: {reply}")
+
+            # Send reply back to Node.js WhatsApp Gateway
+            gateway_url = "http://localhost:3000/send"
+            try:
+                response = requests.post(gateway_url, json={
+                    "number": number,
+                    "text": reply
+                }, timeout=5)
+                print(f"✅ Gateway response: {response.status_code}")
+            except Exception as e:
+                print(f"⚠️ Failed to send to gateway: {e}")
+
+            return JsonResponse({"status": "success", "reply": reply})
+            
+        except Exception as e:
+            print(f"❌ View error: {str(e)}")
+            return JsonResponse({"error": str(e)}, status=500)
+            
     return JsonResponse({"error": "Invalid request"}, status=400)
+

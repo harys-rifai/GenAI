@@ -26,7 +26,7 @@ start_services() {
   fi
 
   echo "🚀 Starting Django server..."
-  nohup python3 manage.py runserver 0.0.0.0:8000 > django.log 2>&1 &
+  nohup python3 manage.py runserver 0.0.0.0:8000 --noreload > django.log 2>&1 &
   DJANGO_PID=$!
 
   cd node_gateway || { echo "❌ Folder node_gateway tidak ditemukan"; exit 1; }
