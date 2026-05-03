@@ -1,0 +1,23 @@
+Haryss-MacBook-Air:genAI harysrifai$ sh run_service.sh 
+Usage: run_service.sh {start|stop|restart}
+Haryss-MacBook-Air:genAI harysrifai$ sh run_service.sh 
+🚀 Starting Django server...
+📡 Starting Node.js WhatsApp Gateway...
+✅ Services started
+   Django log: django.log (PID: 88258)
+   WhatsApp Gateway log: node_gateway/whatsapp_gateway.log (PID: 88259)
+Haryss-MacBook-Air:genAI harysrifai$ sh auto_readme.sh 
+🔄 Generating README.md...
+[main 756a8f57] Auto-update README on 2026-05-03 11:01:07
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 10 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 495 bytes | 495.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0 (from 0)
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/harys-rifai/GenAI.git
+   ec36d449..756a8f57  main -> main
+✅ README.md updated and pushed!
+Haryss-MacBook-Air:genAI harysrifai$ 
