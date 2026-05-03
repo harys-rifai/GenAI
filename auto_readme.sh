@@ -28,9 +28,16 @@ echo "## 📝 Recent Commits" >> README.md
 git log -n 5 --pretty=format:"- %h %s (%cr)" >> README.md
 echo "" >> README.md
 
-# Stage, commit, push
-git add README.md
-git commit -m "Auto-update README on $(date '+%Y-%m-%d %H:%M:%S')"
+# Stage semua perubahan
+git add .
+
+# Commit dengan timestamp
+git commit -m "Auto-update README on $(date '+%Y-%m-%d %H:%M:%S')" || echo "ℹ️ No changes to commit"
+
+# Pull dulu biar sinkron dengan remote
+git pull --rebase origin $BRANCH || { echo "❌ Pull failed, resolve conflicts manually"; exit 1; }
+
+# Push ke remote
 git push origin $BRANCH
 
-echo "✅ README.md updated and pushed!"
+echo "✅ README.md updated, synced, and pushed!"
