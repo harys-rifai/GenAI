@@ -16,7 +16,7 @@ from .context_manager import get_project_summary
 load_dotenv()
 
 # System prompt to give the AI context about the project
-PROJECT_CONTEXT = get_project_summary()
+PROJECT_CONTEXT = get_project_summary().replace("{", "{{").replace("}", "}}")
 OPENCODE_PROMPT = PromptTemplate(
     input_variables=["history", "input"],
     template=f"""You are OpenCode AI Assistant, a specialized AI for reading and understanding the code in this repository.
