@@ -66,5 +66,11 @@ def webhook(request):
             print(f"❌ View error: {str(e)}")
             return JsonResponse({"error": str(e)}, status=500)
             
-    return JsonResponse({"error": "Invalid request"}, status=400)
+    if request.method == "GET":
+        return JsonResponse({
+            "status": "online",
+            "message": "WhatsApp Webhook is running. Send a POST request with 'number' and 'text' to interact with the AI."
+        })
+
+    return JsonResponse({"error": "Invalid request. Please use POST method."}, status=400)
 

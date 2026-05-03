@@ -1,1 +1,16 @@
-Error: [Errno 1] Operation not permitted
+Bad Request: /webhook/
+[03/May/2026 04:24:16] "GET /webhook/ HTTP/1.1" 400 28
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__c39bbc92_d91a_4042_8e0e_7599dd2d64b3__0 HTTP/1.1" 404 2467
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__4afd07e3_288a_4d17_9105_f1506bbf1e9e__1 HTTP/1.1" 404 2467
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__e3c9380f_4f32_4241_b2d5_c1b53dfbb709__2 HTTP/1.1" 404 2467
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__ae508cc8_a4a9_4355_9588_0695791816f5__3 HTTP/1.1" 404 2467
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__b8d08bbd_2a6f_4a38_914c_e6f8e32957ed__4 HTTP/1.1" 404 2467
+Not Found: /hybridaction/zybTrackerStatisticsAction
+[03/May/2026 04:24:17] "GET /hybridaction/zybTrackerStatisticsAction?data=%7B%7D&__callback__=__cb__zybTrackerStatisticsAction__18758554_9270_4f66_bf91_24d1714feccd__5 HTTP/1.1" 404 2467
+Not Found: /robots.txt
+[03/May/2026 04:24:18] "GET /robots.txt HTTP/1.1" 404 2277
