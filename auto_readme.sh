@@ -15,9 +15,9 @@ echo "" >> README.md
 if [ -d "imgs" ]; then
   echo "## 🖼️ UI Screenshots" >> README.md
   for img in imgs/*; do
-    if [[ $img =~ \.(png|jpg|jpeg|gif)$ ]]; then
+    if [[ $img =~ \.(png|jpg|jpeg|gif|PNG|JPG|JPEG|GIF)$ ]]; then
       echo "### $(basename "$img")" >> README.md
-      echo "![]($img)" >> README.md
+      echo "<img src=\"$img\" width=\"600\" alt=\"$(basename "$img")\">" >> README.md
       echo "" >> README.md
     fi
   done
