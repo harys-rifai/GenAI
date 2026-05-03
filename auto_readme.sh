@@ -11,6 +11,18 @@ echo "" >> README.md
 echo "Generated on: $(date '+%Y-%m-%d %H:%M:%S')" >> README.md
 echo "" >> README.md
 
+# Tambahkan gambar UI dari folder imgs
+if [ -d "imgs" ]; then
+  echo "## 🖼️ UI Screenshots" >> README.md
+  for img in imgs/*; do
+    if [[ $img =~ \.(png|jpg|jpeg|gif)$ ]]; then
+      echo "### $(basename "$img")" >> README.md
+      echo "![]($img)" >> README.md
+      echo "" >> README.md
+    fi
+  done
+fi
+
 # Tambahkan log commit terakhir
 echo "## 📝 Recent Commits" >> README.md
 git log -n 10 --pretty=format:"- %h %s (%cr)" >> README.md
